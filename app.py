@@ -1,5 +1,4 @@
-pythonfrom flask import Flask, request
-import requests
+from flask import Flask, requestimport requests
 
 app = Flask(__name__)
 
