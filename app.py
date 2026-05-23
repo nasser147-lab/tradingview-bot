@@ -4,7 +4,7 @@ import requests
 app = Flask(__name__)
 
 BOT_TOKEN = "8884623458:AAHUEQHTCDCnvcMtwAQ4YiA5MBBKStSkPsQ"
-CHAT_ID = "1003993482701"
+CHAT_ID = "-1003993482701"
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
