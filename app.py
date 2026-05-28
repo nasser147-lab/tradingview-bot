@@ -9,8 +9,12 @@ CHAT_ID = os.environ.get("CHAT_ID")
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
-    data = request.get_json(force=True)
-    msg = data.get("text") or data.get("message") or str(data)
+    try:
+        data = request.get_json(force=True)
+        msg = data.get("text") or data.get("message") or str(data)
+    except:
+        msg = request.data.decode("utf-8")
+    
     requests.post(
         f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
         json={"chat_id": CHAT_ID, "text": msg, "parse_mode": "HTML"}
