@@ -3,13 +3,13 @@ import requests
 
 app = Flask(__name__)
 
-BOT_TOKEN = "8884623458:AAHUEQHTCDCnvcMtwAQ4YiA5MBBKStSkPsQ"
-CHAT_ID = "-1003993482701"
+BOT_TOKEN = os.environ.get("TELEGRAM_TOKEN")
+CHAT_ID = os.environ.get("CHAT_ID")
 
 @app.route("/webhook", methods=["POST"])
 def webhook():
     data = request.get_json(force=True)
-    msg = data.get("message", str(data))
+    msg = data.get("text") or data.get("message") or str(data)
     requests.post(
         f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
         json={"chat_id": CHAT_ID, "text": msg, "parse_mode": "HTML"}
