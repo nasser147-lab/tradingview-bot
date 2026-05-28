@@ -15,10 +15,11 @@ def webhook():
     except:
         msg = request.data.decode("utf-8")
     
-    requests.post(
+    response = requests.post(
         f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage",
         json={"chat_id": CHAT_ID, "text": msg, "parse_mode": "HTML"}
     )
+    print(f"Telegram response: {response.status_code} - {response.text}")
     return "OK", 200
 
 if __name__ == "__main__":
